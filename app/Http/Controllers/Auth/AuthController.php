@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -44,7 +46,9 @@ class AuthController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|min:6',
+            'date_of_birth' => 'required|date',
+            'surname' => 'required'
         ]);
     }
 
@@ -58,8 +62,25 @@ class AuthController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'surname' => $data['surname'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'date_of_birth' => $data['date_of_birth'],
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $validation = $this->validator($request->all());
+
+        if($validation->fails())
+        {
+            return redirect()->back()->withErrors($validation)->withInput();
+        }
+
+        $this->create($request->all());
+        return redirect()->back()->withSucces('jej');
+        // return redirect()->back()->withInput();
+        // var_dump($validation);
     }
 }
