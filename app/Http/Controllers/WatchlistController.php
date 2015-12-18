@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Watchlist;
+use Auth;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class WatchlistController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +23,14 @@ class WatchlistController extends Controller
      */
     public function index()
     {
-        //
+        $data = [];
+        $watchlist = Watchlist::where('user_id', Auth::user()->id)->get();
+        // var_dump($watchlist);
+        // $auctions = $watchlist->art;
+      
+        // var_dump($auctions->title);
+        $data['watchlist'] = $watchlist;
+        return View('Watchlist.index')->with($data);
     }
 
     /**
@@ -24,9 +38,16 @@ class WatchlistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $watchlist = new Watchlist;
+
+        $watchlist->user_id = Auth::user()->id;
+        $watchlist->art_id = $id;
+
+        $watchlist->save();
+
+        return redirect()->back()->withSuccess('added to watchlist');
     }
 
     /**
