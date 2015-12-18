@@ -19,12 +19,17 @@ class CreateArtTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('artist_id')->unsigned();
             $table->foreign('artist_id')->references('id')->on('artists');
+            $table->integer('style_id')->unsigned();
+            $table->foreign('style_id')->references('id')->on('styles');
 
             $table->date('date_of_creation');
             $table->integer('est_low_price');
             $table->integer('est_high_price');
+            $table->integer('buyout')->nullable();
             $table->datetime('end_datetime');
-            $table->string('dimensions');
+            $table->string('width');
+            $table->string('height');
+            $table->string('depth')->nullable();
             $table->string('color');
             $table->string('title');
             $table->string('description_nl');

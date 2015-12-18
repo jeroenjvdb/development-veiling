@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWatchlistTable extends Migration
+class CreateFAQTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,11 @@ class CreateWatchlistTable extends Migration
      */
     public function up()
     {
-        Schema::create('watchlist', function($table) {
+        Schema::create('FAQ', function(Blueprint $table) {
             $table->increments('id');
+            $table->string('question');
+            $table->string('answer');
 
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('art_id')->unsigned();
-            $table->foreign('art_id')->references('id')->on('art');
         
         });
     }
@@ -30,6 +28,6 @@ class CreateWatchlistTable extends Migration
      */
     public function down()
     {
-        Schema::drop('watchlist');
+        Schema::drop('FAQ');
     }
 }
