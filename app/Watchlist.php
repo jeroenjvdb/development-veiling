@@ -18,7 +18,7 @@ class Watchlist extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'artist_id'];
+    protected $fillable = ['user_id', 'art_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -28,4 +28,9 @@ class Watchlist extends Model
     protected $hidden = [];
 
     public $timestamps = false;
+
+    public function art()
+    {
+        return $this->belongsTo('App\Art', 'art_id', 'id');
+    }
 }
