@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use App\Style;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -13,7 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $styles = Style::all();
+        view()->share('footerStyle', $styles);
     }
 
     /**

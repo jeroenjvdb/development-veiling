@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
+
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -32,7 +34,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('guest', ['except' => 'logout']);
     }
 
     /**
@@ -82,5 +84,17 @@ class AuthController extends Controller
         return redirect()->back()->withSucces('jej');
         // return redirect()->back()->withInput();
         // var_dump($validation);
+    }
+
+    public function login()
+    {
+        Auth::loginUsingId(1);
+        return redirect()->back()->withSucces('logged in');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->back()->withSucces('logged out');
     }
 }
