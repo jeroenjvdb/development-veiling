@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Art extends Model
 {
@@ -38,4 +39,20 @@ class Art extends Model
      * @var array
      */
     protected $hidden = [];
+
+    public function artist()
+    {
+        return $this->belongsTo('App\Artist', 'artist_id', 'id');
+    }
+
+    public function myWatchlist()
+    {
+        if(Auth::check() && Watchlist::where('user_id', Auth::user()->id)->where('art_id', $this->id)->exists())
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
 }
