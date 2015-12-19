@@ -18,7 +18,7 @@ class Bid extends Model
      *
      * @var array
      */
-    protected $fillable = ['price', 'user_id'];
+    protected $fillable = ['price', 'user_id', 'art_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
