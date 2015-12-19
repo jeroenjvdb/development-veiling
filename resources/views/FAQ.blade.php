@@ -19,11 +19,11 @@
 		@foreach($FAQ as $question)
 			<div class="row">
 				<div class="col-xs-1"><p>Q:</p></div>
-				<div class="col-xs-11"><p>{{ $question->question }}</p></div>
+				<div class="col-xs-9"><p>{{ $question->question }}</p></div>
 			</div>
 			<div class="row">
 				<div class="col-xs-1"><p>A:</p></div>
-				<div class="col-xs-11"><p>{{ $question->answer }}</p></div>
+				<div class="col-xs-9"><p>{{ $question->answer }}</p></div>
 			</div>
 		@endforeach
 	</div>
