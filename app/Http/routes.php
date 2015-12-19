@@ -11,18 +11,22 @@
 |
 */
 
-Route::get('/', 'mainController@dashboard');
+Route::get('/', ['as' => 'home', 'uses' => 'mainController@dashboard']);
 
-Route::get('/register', 'UserController@create');
-Route::post('/register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@register']);
+Route::get('/register', ['as' => 'auth.register', 'uses' => 'UserController@create']);
+Route::post('/register', [ 'uses' => 'Auth\AuthController@register']);
 Route::get('/auth/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@login']);
 Route::get('/logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@logout']);
+
+Route::get('/profile', ['as' => 'profile', 'uses' => 'UserController@overview']);
 
 Route::resource('user', 'UserController');
 Route::get('/art/my-auctions', ['as' => 'myAuctions', 'uses' => 'ArtController@myAuctions']);
 Route::resource('art', 'ArtController');
 Route::resource('artist', 'ArtistController');
-Route::resource('bid', 'BidController');
+
+Route::post('/bid/{id}', ['as' => 'bid', 'uses' => 'BidController@create']);
+
 Route::resource('picture', 'PictureController');
 
 // Route::resource('watchlist', 'WatchlistController');

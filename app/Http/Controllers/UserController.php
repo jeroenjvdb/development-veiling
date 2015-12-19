@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'create']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +21,11 @@ class UserController extends Controller
     public function index()
     {
         //
+    }
+
+    public function overview()
+    {
+        echo 'overview';
     }
 
     /**

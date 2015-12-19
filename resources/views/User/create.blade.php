@@ -5,8 +5,11 @@
 @stop
 
 @section('content')
-<h1>registreren</h1>
-	{!! Form::open(['route' => 'auth.register']) !!}
+<div class="container"><div class="row">
+    <div class="col-md-12">
+        
+    <h1>registreren</h1>
+    {!! Form::open(['route' => 'auth.register']) !!}
         <legend>registreren</legend>
                       
         <div class="form-group">
@@ -18,16 +21,16 @@
             {!! Form::password('password', ['placeholder' => 'Je paswoord','type' => 'password','required','min' => '8','id' => 'password','class' => 'form-control']) !!}                
         </div>
         <div class="form-group">
-        	<label for="surname">voornaam</label>
-        	{!! Form::text('surname', '', ['placeholder' => 'jan', 'type' => 'text', 'required']) !!}
+            <label for="surname">voornaam</label>
+            {!! Form::text('surname', '', ['placeholder' => 'jan', 'type' => 'text', 'required']) !!}
         </div>
         <div class="form-group">
-        	<label for="surname">naam</label>
-        	{!! Form::text('name', '', ['placeholder' => 'janssens', 'type' => 'text', 'required']) !!}
+            <label for="surname">naam</label>
+            {!! Form::text('name', '', ['placeholder' => 'janssens', 'type' => 'text', 'required']) !!}
         </div>
         <div class="form-group">
-        	<label for="surname">geboortedatum</label>
-        	{!! Form::date('date_of_birth', '',['placeholder' => '01/01/2015', 'type' => 'text', 'required']) !!}
+            <label for="surname">geboortedatum</label>
+            {!! Form::date('date_of_birth', '',['placeholder' => '01/01/2015', 'type' => 'text', 'required']) !!}
         </div>
 
 
@@ -36,4 +39,6 @@
             
         </div>
     {!! Form::close() !!}           
+    </div>
+</div></div>
 @stop
