@@ -6,7 +6,7 @@
 	{!! Html::style('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css') !!}
 	<style>
 		html{
-			padding: 5px;
+			/*padding: 5px;*/
 		}
 
 		footer{
@@ -102,6 +102,39 @@
 			text-align: left;
 		}
 
+		.navbar-header{
+			position: absolute;
+			top: -15px;
+			/*z-index: 16;*/
+		}
+
+		.navbar-top{
+			list-style-type: none;
+			margin-left: -40px;
+			margin-top: 15px;
+
+		}
+
+		.navbar-top li{
+			margin-left: 20px;
+			margin-right: 20px;
+		}
+
+		.navbar-top li:first-of-type{
+			margin-left: 0;
+		}
+
+		.btn-no{
+			border: none;
+			background-color: transparent;
+		}
+
+		.navbar-form
+		{
+			/*margin-right: 0;*/
+			padding-right: 0; 
+		}
+
 	</style>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
 </head>
@@ -115,16 +148,20 @@
 	</header>
 
 	<div class="container">
-
-		@if (count($errors) > 0)
-		    <div class="alert alert-danger">
-		        <ul>
-		            @foreach ($errors->all() as $error)
-		                <li>{{ $error }}</li>
-		            @endforeach
-		        </ul>
-		    </div>
-		@endif
+		<div class="row">
+			<div class="col-xs-offset-2 col-xs-8">
+				@if (count($errors) > 0)
+				    <div class="alert alert-danger">
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li>{{ $error }}</li>
+				            @endforeach
+				        </ul>
+				    </div>
+				@endif
+			</div>
+		</div>
+		
 	</div>
 	<div class="content">
 		@yield('content')
