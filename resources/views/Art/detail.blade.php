@@ -28,10 +28,10 @@
 					@if(isset($auction->buyout))
 						<p>Buy now for &euro;  {{ $auction->buyout }}</p>
 					@endif
-					<p>bids: {{-- #of bids --}}</p>
+					<p>bids: {{ count($auction->bids) }} </p>
 					<div class="container-fluid bid">
 						<div class="row">
-							{!! Form::open() !!}
+							{!! Form::open(['route' => array('bid', 'id' => $auction->id)]) !!}
 								<div class="col-md-7">{!! Form::text('amount', '') !!}</div>
 								<div class="col-md-5">{!! Form::submit() !!}</div>
 							{!! Form::close() !!}
@@ -63,7 +63,7 @@
 						<p><strong>Color</strong> <br>
 							{{ $auction->color }}</p>
 						<div>
-							<a href="">ASK A GUESTION ABOUT THIS AUCTION</a>
+							<a href="">ASK A QUESTION ABOUT THIS AUCTION</a>
 						</div>
 					</div>
 				

@@ -45,6 +45,11 @@ class Art extends Model
         return $this->belongsTo('App\Artist', 'artist_id', 'id');
     }
 
+    public function bids()
+    {
+        return $this->hasMany('App\Bid', 'art_id', 'id');
+    }
+
     public function myWatchlist()
     {
         if(Auth::check() && Watchlist::where('user_id', Auth::user()->id)->where('art_id', $this->id)->exists())
