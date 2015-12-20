@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -25,7 +26,11 @@ class UserController extends Controller
 
     public function overview()
     {
-        echo 'overview';
+        $data = [];
+        $user = Auth::user();
+        $data['user'] = $user;
+
+        return View('User.overview')->with($data);
     }
 
     /**
