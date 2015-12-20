@@ -60,4 +60,14 @@ class Art extends Model
             return false;
         }
     }
+
+    public function sold()
+    {
+        return $this->hasMany('App\Sold', 'art_id', 'id');
+    }
+
+    public function pictures()
+    {
+        return $this->hasMany('App\Picture', 'art_id', 'id');
+    }
 }

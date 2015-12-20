@@ -7,6 +7,7 @@
 @section('content')
 	<div class="container">
 		<h1>My auctions</h1>
+		{!! Html::linkRoute('art.create', 'add new auction') !!}
 		<div class="row">
 			<div class="col-md-12">
 				<h2>Pending</h2>

@@ -13,6 +13,10 @@
 		<div class="row">
 			<div class="col-md-8">
 				{{-- pictures --}}
+				@foreach($auction->pictures as $img)
+					<img src="{{ $img->url }}" alt="" style="max-width: 100%;">
+
+				@endforeach
 			</div>
 			<div class="col-md-4">
 				<h2>{{ $auction->title }}</h2>
@@ -26,7 +30,8 @@
 					<p>Estimated price:</p>
 					<p>&euro; {{ $auction->est_low_price }}-&euro; {{ $auction->est_high_price }}</p>
 					@if(isset($auction->buyout))
-						<p>Buy now for &euro;  {{ $auction->buyout }}</p>
+						{!! Html::linkRoute('art.buynow', 'Buy now for &euro; ' . $auction->buyout, ['id' => $auction->id]) !!}
+						{{-- <p>  {{ $auction->buyout }}</p> --}}
 					@endif
 					<p>bids: {{ count($auction->bids) }} </p>
 					<div class="container-fluid bid">
