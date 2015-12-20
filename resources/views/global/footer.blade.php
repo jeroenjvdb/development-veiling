@@ -10,7 +10,7 @@
 			<ul class="list-unstyled">
 				<li>Terms of Service</li>
 				<li>Privacy Policy</li>
-				<li>FAQ</li>
+				<li>{!! Html::link(route('FAQ'), 'FAQ') !!}</li>
 				<li>Contact Us</li>
 				<li>About Us</li>
 			</ul>

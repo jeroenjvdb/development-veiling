@@ -3,10 +3,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>@yield('page-title') | Landoretti ART</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+
 	{!! Html::style('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css') !!}
 	<style>
 		html{
 			/*padding: 5px;*/
+		}
+		h1{
+			font-size: 36px;
+		}
+		h2{
+			padding-bottom: 30px;
+		}
+
+		h3{
+			margin-top: 10px;
 		}
 
 		footer{
@@ -70,7 +82,7 @@
 
 		.box{
 			border: 1px solid #f3f3f3;
-			padding: 5px;
+			padding: 20px;
 		}
 
 		.bid{
@@ -135,8 +147,11 @@
 			padding-right: 0; 
 		}
 
+		.vertical-divider{
+			border-right: 1px solid #f3f3f3;
+		}
+
 	</style>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
 </head>
 <body>
 	<nav>

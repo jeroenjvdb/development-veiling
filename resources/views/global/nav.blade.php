@@ -31,12 +31,14 @@
                   <li><a href="{{ route('auth.logout') }}">LOGOUT</a></li>
                 @endif
               </ul>
-              <form class="navbar-form navbar-right" role="search">
+              {!! Form::open(['route' => 'art.search', 'method' => 'post', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
+              
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                {!! Form::text('search', '', array('placeholder' => 'Search', 'class' => 'form-control')) !!}
               </div>
+              
               <button type="submit" class="btn btn-no"><span class="glyphicon glyphicon-search"></span></button>
-            </form>
+              {!! Form::close() !!}
           </div>
         </div>
       </div>
