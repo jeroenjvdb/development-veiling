@@ -32,6 +32,7 @@ class ArtTableSeeder extends Seeder
         $auction->est_low_price = 9500;
         $auction->est_high_price = 10500;
         $auction->buyout = 15000;
+        $auction->sold = false;
 
         $auction->end_datetime = "2016-01-08 12:00:00";
 

@@ -36,6 +36,7 @@ class CreateArtTable extends Migration
             $table->string('description_en');
             $table->string('condition_nl');
             $table->string('condition_en');
+            $table->boolean('sold');
 
             $table->timestamps();
         
