@@ -69,7 +69,14 @@
 	</div>
 	<div class="col-md-4 footercolumn footercolumn-right">
 		<h4>Find what you need.</h4>
-		<input type="text">
+		{!! Form::open(['route' => 'art.search', 'method' => 'post', 'class' => 'navbar-form footer-form', 'role' => 'search']) !!}
+              
+              <div class="form-group">
+                {!! Form::text('search', '', array('placeholder' => trans('global.search'), 'class' => 'form-control')) !!}
+              </div>
+              
+          <button type="submit" class="btn btn-no"><span class="glyphicon glyphicon-search"></span></button>
+          {!! Form::close() !!}
 		<h4>Contact</h4>
 		<div itemscope itemtype="http://schema.org/Organization">
 			<span itemprop="legalName">Landoretti ART</span></br>
@@ -78,6 +85,10 @@
 			<span class="glyphicon glyphicon-earphone"></span><span itemprop="telephone">+xx (0)x xxx xx xx</span></br>
 			<span class="glyphicon glyphicon-envelope"></span> <span itemprop="email">info@landorettiart.com</span></br>
 			<p>facebook twitter youtube g+</p>
+			<a href="http://www.facebook.com" class="facebook"></a>
+			<a href="http://www.twitter.com" class="twitter"></a>
+			<a href="http://www.youtube.com" class="youtube"></a>
+			<a href="http://plus.google.com" class="googleplus"></a>
 		</div>
 
 	</div>
