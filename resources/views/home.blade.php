@@ -52,7 +52,7 @@
 	<div class="white">
 		<div class="container">
 			<div class="col-md-4 center" >
-				<h3>Sign Up</h3>
+				<h3>Sign up</h3>
 				<p>Lorem ipsum dolor sit amet,</br> consectetur adipisicing elit,</br> sed do eiusmod tempor incididunt.</p>
 			</div>
 			<div class="col-md-4 center">

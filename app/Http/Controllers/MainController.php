@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\FAQ;
 use App\Art;
+use App;
+use Lang; 
+use Session;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Auction;
+
+
 
 class MainController extends Controller
 {
@@ -26,23 +32,20 @@ class MainController extends Controller
     	return View('FAQ')->with($data);
     }
 
-    public function search(Request $request)
+    public function contact($auction = False)
     {
-    	$data = [];
-                
-        $search = $request->input('search');
-        if($search == "")
+        if(!$auction)
         {
-            return redirect()->route('home')->withErrors(['please fill in the searchbox']);
+
         }
+    }
 
-        $data['query'] = $search;
+    public function setLocale($lang)
+    {
+        Session::put('locale', $lang);
+            App::setLocale($lang);
+            echo Lang::getLocale();
 
-        $artOutput = Art::where('description_nl', 'like', '%' . $search . '%')->get();
-        // var_dump($searchOutput);
-
-    	$data['art'] = $artOutput;
-
-    	return View('Main.search')->with($data);
+            return redirect()->back();
     }
 }
