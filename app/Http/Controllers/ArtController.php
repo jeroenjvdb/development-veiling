@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class ArtController extends Controller
 {
@@ -24,22 +25,17 @@ class ArtController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function __construct()
     {
-        $art = Art::all();
-
-        $data = [];
-        $data['auctions'] = $art;
-
-        return View('Art.index')->with($data);
+        $this->middleware('auth', ['except' => ['show']]);
     }
-
 
     protected function validation($data)
     {
         return Validator::make($data, [
             'title'             => 'required|max:255',
-            'year'              => 'required|min:1000|max:2030|numeric',
+            'date_of_creation'  => 'required|min:1000|max:2030|numeric',
             'width'             => 'required|alpha_num',
             'height'            => 'required|alpha_num',
             'depth'             => 'alpha_num',
@@ -69,10 +65,8 @@ class ArtController extends Controller
         $styleArray[0] = 'select a style';
         foreach($styles as $style)
         {
-            // var_dump($style->name);
             $styleArray[$style->id] = $style->name;
         }
-        // var_dump($styleArray);
         $data = ['styleArray' => $styleArray];
         return View('Art.create')->with($data);
     }
@@ -86,18 +80,24 @@ class ArtController extends Controller
      */
     public function store(Request $request)
     {
-        // var_dump($request->all());
         $validation = $this->validation($request->all());
+
         if($validation->fails())
         {
             return redirect()->back()->withInput()->withErrors($validation);
         }
+
         if(!($request->file('artwork')->isValid() || $request->file('signature')->isValid()))
         {
-            return redirect()->back()->withInput()->withErrors(['there went something wrong while uploading the pictures.']);
+            return redirect()->back()
+                                ->withInput()
+                                ->withErrors(['there went something wrong while uploading the pictures.']);
         }
+
         $auction = new Art;
+
         $auction->fill($request->all());
+        $auction->slug = $this->slugify($request->input('title'));
         $auction->description_nl = $request->input('description');
         $auction->description_en = $request->input('description');
 
@@ -105,9 +105,9 @@ class ArtController extends Controller
         $auction->condition_en = $request->input('condition');
 
 
-        $auction->user_id = 1;
+        $auction->user_id   = 1;
         $auction->artist_id = 1;
-        $auction->style_id = 1;
+        $auction->style_id  = 1;
 
 
         $auction->save();
@@ -118,8 +118,6 @@ class ArtController extends Controller
         {
             $this->storeImage($auction, $request->file('optional_image'), false);
         }
-        // echo '</br>';
-        // var_dump($auction);
 
         return redirect()->route('art.index')->withSuccess('successfully made a new auction');
     }
@@ -140,29 +138,7 @@ class ArtController extends Controller
         $picture->isMaster  = $isMaster;
 
         $picture->save();
-        // $competitor->thumbnail      = '/' . $thumbnailPath;
-        // $competitor->ip             = $request->getClientIp();
-        // $competitor->is_deleted     = 0;
-        // //voor wanneer ik thumbnails wil maken
-        // $pic = $request->file('duvel');
-
-        // //make a thumbnail for the same pic with a height of 100
-        // $picSize            = getimagesize($pic);
-        // $width              = $picSize[0];
-        // $height             = $picSize[1];
-        // $newHeight          = 100;
-        // //change the width depending on the height of the pic
-        // $newWidth           = $newHeight * ($width/$height);
-        // $image              = imagecreatefromjpeg($pic);
-        // $thumbnail          = imagecreatetruecolor($newWidth, $newHeight);
-        // //make the pic ($image) smaller and move it to $thumbnail
-        // $newImage           = imagecopyresampled($thumbnail, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-        // //the path where to put the thumbnail
-        // $thumbnailPath      = $destinationPath . 'thumbnail/' . $fileName;
-        // imagejpeg($thumbnail, $thumbnailPath);
-        // uploading file to given path
-        //make the competitor object for the database
-
+        
     }
 
     /**
@@ -171,15 +147,27 @@ class ArtController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Art $auction)
     {
         $data = [];
-        $auction = Art::findorfail($id);
-        // var_dump($auction);
+        // $auction = Art::findorfail($id);
+        //create all necessary time formats
+        $end_datetime = Carbon::createFromFormat('Y-m-d H:i:s' ,$auction->end_datetime, 'Europe/Brussels');
+        //array for all the time formats
+        $toGo = [];
+        $toGo['months'] = $end_datetime->diffInMonths();
+        $daysToGo = $end_datetime->subMonths($toGo['months']);
+        $toGo['days'] = $daysToGo->diffInDays();
+        $hoursToGo = $daysToGo->subDays($toGo['days']);
+
+        $toGo['hours'] = $hoursToGo->diffInHours();
+        $minutesToGo = $hoursToGo->subHours($toGo['hours']);
+        $toGo['minutes'] = $minutesToGo->diffInMinutes();
+
+        $auction->toGo = $toGo;
+
         $data['auction'] = $auction;
 
-        
-        // var_dump($auction->myWatchlist());
         return View('Art.detail')->with($data);
 
     }
@@ -221,12 +209,34 @@ class ArtController extends Controller
     public function myAuctions()
     {
         $data = [];
-        $data['pending'] = null;
-        $data['refused'] = null;
-        $data['active'] = null;
-        $data['expired'] = null;
-        $data['sold'] = null;
+        $active = Art::where('user_id', Auth::user()->id)->
+                        where('processed', '0')->
+                        where('sold', '0')->get();
+        $sold = Art::where('user_id', Auth::user()->id)->
+                        where('processed', '1')->
+                        where('sold', '1')->get();
+        $expired = Art::where('user_id', Auth::user()->id)->
+                        where('processed', '1')->
+                        where('sold', '0')->get();
+        $allAuctions = Art::all();
+        $pending = new \Illuminate\Database\Eloquent\Collection;
+        
+        
+        foreach($allAuctions as $auction)
+        {
+            var_dump( count($auction->bids));
+            if(!count($auction->bids) && $auction->processed == '0')
+            {
+                echo $auction->title;
+                $pending->push($auction);
+            }
+        }
+       
 
+        $data['pending'] = $pending;
+        $data['active'] = $active;
+        $data['expired'] = $expired;
+        $data['sold'] = $sold;
         return View('Art.myAuctions')->with($data);
     }
 
@@ -244,29 +254,54 @@ class ArtController extends Controller
         $sold->buyer_id = $buyer->id;
         $sold->save();
 
+        $art->sold = 1;
+        $art->save();
+
         $data = [];
         $data['art'] = $art;
 
         return View('Art.bought')->with($data);
     }
 
-    public function search(Request $request)
+    
+
+    protected function highest_bid($bids)
     {
-        $data = [];
-                
-        $search = $request->input('search');
-        if($search == "")
+        $highest = 0;
+        foreach($bids as $bid)
         {
-            return redirect()->route('home')->withErrors(['please fill in the searchbox']);
+            if($bid->price > $highest)
+            {
+                $highest = $bid->price;
+            }
         }
+        return $highest;
+    }
 
-        $data['query'] = $search;
+    protected function slugify($text)
+    { 
+      // replace non letter or digits by -
+      $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
 
-        $artOutput = Art::where('description_nl', 'like', '%' . $search . '%')->get();
-        // var_dump($searchOutput);
+      // trim
+      $text = trim($text, '-');
 
-        $data['art'] = $artOutput;
+      // transliterate
+      $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
 
-        return View('Main.search')->with($data);
+      // lowercase
+      $text = strtolower($text);
+
+      // remove unwanted characters
+      $text = preg_replace('~[^-\w]+~', '', $text);
+
+      $text = $text . '-' . str_random(5);
+
+      if (empty($text))
+      {
+        return 'n-a';
+      }
+
+      return $text;
     }
 }
