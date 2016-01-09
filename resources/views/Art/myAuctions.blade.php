@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h2>Pending</h2>
-				@if(count($pending) > 0)
+				@if(count($pending))
 				<table>
 					<tr>
 						<th colspan="4">Auction details</th>
@@ -21,39 +21,18 @@
 					</tr>
 					@foreach($pending as $auction)
 						<tr>
-							<td>{{-- picture --}}</td>
-							<td colspan="3">{{ $auction->art->title }}</td>
-							<td>&euro; {{ $auction->art->est_low_price }} - &euro; {{ $auction->art->est_high_price }}</td>
-							<td>{{ $auction->art->end_datetime }}</td>
-							<td>{{ $auction->art->end_datetime }}</td>
+							<td><img src="{{ $auction->pictures()->first()->url }}"></td>
+							<td colspan="3">{{ $auction->title }}</td>
+							<td>&euro; {{ $auction->est_low_price }} - &euro; {{ $auction->est_high_price }}</td>
+							<td>{{ $auction->end_datetime }}</td>
+							<td>{{ $auction->end_datetime }}</td>
 						</tr>
 					@endforeach
 				</table>
 				@else
 					<p>You have no pending auctions</p>
 				@endif
-				<h2>Refused</h2>
-				@if(count($refused) > 0)
-				<table>
-					<tr>
-						<th colspan="4">Auction details</th>
-						<th>Estimated price</th>
-						<th>End date</th>
-						<th>Remaining time</th>
-					</tr>
-					@foreach($refused as $auction)
-						<tr>
-							<td>{{-- picture --}}</td>
-							<td colspan="3">{{ $auction->art->title }}</td>
-							<td>&euro; {{ $auction->art->est_low_price }} - &euro; {{ $auction->art->est_high_price }}</td>
-							<td>{{ $auction->art->end_datetime }}</td>
-							<td>{{ $auction->art->end_datetime }}</td>
-						</tr>
-					@endforeach
-				</table>
-				@else
-					<p>You have no pending auctions</p>
-				@endif
+				
 				<h2>Active</h2>
 				@if(count($active) > 0)
 				<table>
@@ -65,16 +44,16 @@
 					</tr>
 					@foreach($active as $auction)
 						<tr>
-							<td>{{-- picture --}}</td>
-							<td colspan="3">{{ $auction->art->title }}</td>
-							<td>&euro; {{ $auction->art->est_low_price }} - &euro; {{ $auction->art->est_high_price }}</td>
-							<td>{{ $auction->art->end_datetime }}</td>
-							<td>{{ $auction->art->end_datetime }}</td>
+							<td><img src="{{ $auction->pictures()->first()->url }}"></td>
+							<td colspan="3">{{ $auction->title }}</td>
+							<td>&euro; {{ $auction->est_low_price }} - &euro; {{ $auction->est_high_price }}</td>
+							<td>{{ $auction->end_datetime }}</td>
+							<td>{{ $auction->end_datetime }}</td>
 						</tr>
 					@endforeach
 				</table>
 				@else
-					<p>You have no pending auctions</p>
+					<p>You have no active auctions</p>
 				@endif
 				<h2>Expired</h2>
 				@if(count($expired) > 0)
@@ -87,16 +66,16 @@
 					</tr>
 					@foreach($expired as $auction)
 						<tr>
-							<td>{{-- picture --}}</td>
-							<td colspan="3">{{ $auction->art->title }}</td>
-							<td>&euro; {{ $auction->art->est_low_price }} - &euro; {{ $auction->art->est_high_price }}</td>
-							<td>{{ $auction->art->end_datetime }}</td>
-							<td>{{ $auction->art->end_datetime }}</td>
+							<td><img src="{{ $auction->pictures()->first()->url }}"></td>
+							<td colspan="3">{{ $auction->title }}</td>
+							<td>&euro; {{ $auction->est_low_price }} - &euro; {{ $auction->est_high_price }}</td>
+							<td>{{ $auction->end_datetime }}</td>
+							<td>{{ $auction->end_datetime }}</td>
 						</tr>
 					@endforeach
 				</table>
 				@else
-					<p>You have no pending auctions</p>
+					<p>You have no expired auctions</p>
 				@endif
 				<h2>Sold</h2>
 				@if(count($sold) > 0)
@@ -109,16 +88,16 @@
 					</tr>
 					@foreach($sold as $auction)
 						<tr>
-							<td>{{-- picture --}}</td>
-							<td colspan="3">{{ $auction->art->title }}</td>
-							<td>&euro; {{ $auction->art->est_low_price }} - &euro; {{ $auction->art->est_high_price }}</td>
-							<td>{{ $auction->art->end_datetime }}</td>
-							<td>{{ $auction->art->end_datetime }}</td>
+							<td><img src="{{ $auction->pictures()->first()->url  }}" alt=""></td>
+							<td colspan="3">{{ $auction->title }}</td>
+							<td>&euro; {{ $auction->est_low_price }} - &euro; {{ $auction->est_high_price }}</td>
+							<td>{{ $auction->end_datetime }}</td>
+							<td>{{ $auction->end_datetime }}</td>
 						</tr>
 					@endforeach
 				</table>
 				@else
-					<p>You have no pending auctions</p>
+					<p>You have no sold auctions</p>
 				@endif
 			</div>
 		</div>

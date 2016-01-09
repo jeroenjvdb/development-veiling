@@ -20,8 +20,8 @@
 						{!! Form::text('title', '', array('placeholder' => 'Auction title')) !!}
 					</div>
 					<div class="col-md-4">
-						{!! Form::label('Year', 'year') !!}</br>
-						{!! Form::text('year', '', array('placeholder' => 'X X X X')) !!}
+						{!! Form::label('date_of_creation', 'Year') !!}</br>
+						{!! Form::text('date_of_creation', '', array('placeholder' => 'X X X X')) !!}
 					</div>
 				</div>
 				<div class="row">
