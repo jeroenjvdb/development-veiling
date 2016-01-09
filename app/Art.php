@@ -70,4 +70,17 @@ class Art extends Model
     {
         return $this->hasMany('App\Picture', 'art_id', 'id');
     }
+
+    public function highest_bid()
+    {
+        $highest = 0;
+        foreach($this->bids() as $bid)
+        {
+            if($bid->price > $highest)
+            {
+                $highest = $bid->price;
+            }
+        }
+        return $highest;
+    }
 }

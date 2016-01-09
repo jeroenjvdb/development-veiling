@@ -14,6 +14,7 @@ class CreateArtTable extends Migration
     {
         Schema::create('art', function(Blueprint $table) {
             $table->increments('id');
+            $table->string('slug')->unique();
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
@@ -22,7 +23,7 @@ class CreateArtTable extends Migration
             $table->integer('style_id')->unsigned();
             $table->foreign('style_id')->references('id')->on('styles');
 
-            $table->date('date_of_creation');
+            $table->integer('date_of_creation');
             $table->integer('est_low_price');
             $table->integer('est_high_price');
             $table->integer('buyout')->nullable();
@@ -37,6 +38,7 @@ class CreateArtTable extends Migration
             $table->string('condition_nl');
             $table->string('condition_en');
             $table->boolean('sold');
+            $table->boolean('processed');
 
             $table->timestamps();
         
