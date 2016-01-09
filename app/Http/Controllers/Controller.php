@@ -7,7 +7,16 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+use Session;
+
+
 abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function __construct()
+    {
+    	$lang = Session::get('locale');
+        if ($lang != null) \App::setLocale($lang);
+    }
 }
