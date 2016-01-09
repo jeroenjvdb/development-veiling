@@ -19,6 +19,7 @@ class ArtTableSeeder extends Seeder
         $auction->style_id = 1;
 
         $auction->title = "Dance of Time III";
+        $auction->slug = "Dance-of-Time-III";
         $auction->description_nl = "description in het nederlands";
         $auction->description_en = "description in het engels";
         $auction->condition_nl = "Condition in het nederlands";
@@ -27,7 +28,7 @@ class ArtTableSeeder extends Seeder
         $auction->height = "70cm";
         $auction->depth = "2.5cm";
         $auction->color = "Bronze, patinated branze and gold";
-        $auction->date_of_creation = "1979-01-01";
+        $auction->date_of_creation = "1979";
 
         $auction->est_low_price = 9500;
         $auction->est_high_price = 10500;

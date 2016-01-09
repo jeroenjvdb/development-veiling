@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ArtistTableSeeder::class);
         $this->call(ArtTableSeeder::class);
         $this->call(FAQTableSeeder::class);
+        $this->call(PicturesTableSeeder::class);
 
         Model::reguard();
     }
