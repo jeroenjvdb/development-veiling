@@ -86,15 +86,28 @@ class AuthController extends Controller
         // var_dump($validation);
     }
 
-    public function login()
+    public function getLogin()
     {
         Auth::loginUsingId(1);
         return redirect()->back()->withSucces('logged in');
+        // return View('');
+    }
+
+    public function login(Request $request)
+    {
+        if($request->input('user') && $request->input('password'))
+        {
+                if (Auth::attempt(['email' => $request->input('user'), 'password' => $request->input('password')])) {
+                // Authentication passed...
+                return redirect()->route('home');
+            }
+        }
+        return redirect()->route('home')->withErrors('there was something wrong with your email or password');
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect()->back()->withSucces('logged out');
+        return redirect()->route('home')->withSucces('logged out');
     }
 }
