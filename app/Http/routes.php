@@ -48,7 +48,7 @@ Route::get('/art/show/{auction}', ['as' => 'art.show', 'uses' => 'ArtController@
 // extra art links
 Route::get('/art/filter/{sort}/{class?}/{filter?}', ['as' => 'art.filter', 'uses' => 'ShowAuctionsController@listArt']);
 Route::get('/my-auctions', ['as' => 'myAuctions', 'uses' => 'ArtController@myAuctions']);
-Route::get('/my-bids', ['as' => 'myBids', 'uses' => 'UserController@myBids']);
+Route::get('/my-bids', ['as' => 'myBids', 'uses' => 'BidController@myBids']);
 
 Route::get('/search/{search}/{sort?}/{class?}/{filter?}', ['as' => 'art.search', 'uses' => 'ShowAuctionsController@search']);
 Route::post('/search', ['uses' => 'ShowAuctionsController@postSearch']);

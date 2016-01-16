@@ -18,10 +18,14 @@ abstract class Controller extends BaseController
     public function __construct()
     {
     	$lang = Session::get('locale');
-        if ($lang != null) \App::setLocale($lang);
+        if ($lang != null)
+        {
+        	\App::setLocale($lang);	
+        } 
 
-        $data = [];
+        // $data = [];
         $styles = Style::all();
-        view()->share('footerStyle', $styles);
+        Session::put('footerStyle', $styles);
+        // view()->share('footerStyle', $styles);
     }
 }
