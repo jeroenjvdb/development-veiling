@@ -77,6 +77,25 @@ class BidController extends Controller
         
     }
 
+    public function myBids()
+    {
+        $bids = Bid::where('user_id', Auth::user()->id)->groupBy('art_id')->get();
+        $auctions = collect([]);
+        // echo '<pre>';
+        foreach($bids as $bid)
+        {
+            $auction = $bid->art;
+            // var_dump($auction);
+            $auctions->push($auction);
+        }
+
+        // var_dump($auctions);
+        // dd();
+        // $data=[];
+        $data['auctions'] = $auctions;
+        return View('User.my-bids')->with($data);
+    }
+
     
 
     /**

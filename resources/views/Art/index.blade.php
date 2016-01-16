@@ -51,7 +51,7 @@
 			<h4>Style</h4>
 
 			<ul class="list-unstyled">
-				@foreach($footerStyle as $style)
+				@foreach(Session::get('footerStyle') as $style)
 					<li><a href="{{ route('art.filter', ['class' => 'style', 'filter' => $style->id, 'sort' => $sort]) }}">{{ $style->name }}</a></li>
 				@endforeach
 			</ul>
