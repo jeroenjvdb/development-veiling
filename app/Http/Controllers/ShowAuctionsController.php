@@ -23,7 +23,7 @@ class ShowAuctionsController extends Controller
 
         // get the auction filters
         $auctions = $this->add_filters($auctions, $sort, $class, $filter);
-        $auctions = $auctions->get();
+        $auctions = $auctions->paginate(9);
         if(!(isset($auctions) ||$auctions->first()->id))
         {
             $auctions = [];
@@ -66,7 +66,7 @@ class ShowAuctionsController extends Controller
         // var_dump($searchOutput)
         //add auction filters
         $auctions = $this->add_filters($artOutput, $sort, $class, $filter);
-        $auctions = $auctions->groupBy('bids.art_id')->get();
+        $auctions = $auctions->groupBy('bids.art_id')->paginate(9);
         
 
         $data = [];

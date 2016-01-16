@@ -149,6 +149,7 @@ class ArtController extends Controller
      */
     public function show(Art $auction)
     {
+        // dd($auction);
         $data = [];
         // $auction = Art::findorfail($id);
         //create all necessary time formats
@@ -224,10 +225,10 @@ class ArtController extends Controller
         
         foreach($allAuctions as $auction)
         {
-            var_dump( count($auction->bids));
+            // var_dump( count($auction->bids));
             if(!count($auction->bids) && $auction->processed == '0')
             {
-                echo $auction->title;
+                // echo $auction->title;
                 $pending->push($auction);
             }
         }

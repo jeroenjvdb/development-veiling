@@ -45,6 +45,11 @@ class Art extends Model
         return $this->belongsTo('App\Artist', 'artist_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
+
     public function bids()
     {
         return $this->hasMany('App\Bid', 'art_id', 'id');

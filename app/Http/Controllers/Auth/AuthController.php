@@ -88,9 +88,10 @@ class AuthController extends Controller
 
     public function getLogin()
     {
-        Auth::loginUsingId(1);
-        return redirect()->back()->withSucces('logged in');
-        // return View('');
+        // echo 'loginpae';
+        // Auth::loginUsingId(1);
+        // return redirect()->back()->withSucces('logged in');
+        return View('auth.login');
     }
 
     public function login(Request $request)
@@ -102,7 +103,7 @@ class AuthController extends Controller
                 return redirect()->route('home');
             }
         }
-        return redirect()->route('home')->withErrors('there was something wrong with your email or password');
+        return redirect()->route('auth.login')->withErrors('there was something wrong with your email or password');
     }
 
     public function logout()

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Auth;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use App\Bid;
 
 class UserController extends Controller
 {
@@ -98,5 +101,24 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function myBids()
+    {
+        $bids = Bid::where('user_id', Auth::user()->id)->groupBy('art_id')->get();
+        $auctions = collect([]);
+        // echo '<pre>';
+        foreach($bids as $bid)
+        {
+            $auction = $bid->art;
+            // var_dump($auction);
+            $auctions->push($auction);
+        }
+
+        // var_dump($auctions);
+        // dd();
+        $data=[];
+        $data['auctions'] = $auctions;
+        return View('User.my-bids')->with($data);
     }
 }

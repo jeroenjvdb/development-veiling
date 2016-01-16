@@ -31,4 +31,9 @@ class Bid extends Model
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
+
+    public function art()
+    {
+        return $this->belongsTo('App\Art', 'art_id', 'id');
+    }
 }
