@@ -7,6 +7,8 @@ use App\Art;
 use App\User;
 
 use Carbon\Carbon;
+use Illuminate\Foundation\Inspiring;
+
 use Mail;
 
 class AuctionEnd extends Command
@@ -42,8 +44,10 @@ class AuctionEnd extends Command
      */
     public function handle()
     {
+        $this->comment(PHP_EOL.Inspiring::quote().PHP_EOL);
         $auctions = Art::where('art.end_datetime' ,'<', Carbon::now())->
                         where('art.processed', '0')->get();
+        // $test = $test;
 
         foreach($auctions as $art)
         {
