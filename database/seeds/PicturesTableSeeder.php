@@ -11,27 +11,30 @@ class PicturesTableSeeder extends Seeder
      */
     public function run()
     {
-        $pic = new App\Picture;
+        for($i = 0; $i<70;$i++)
+        {
+            $pic = new App\Picture;
 
-        $pic->art_id = 1;
-        $pic->url = '/auction/img/34047.jpg';
-        $pic->isMaster = 1;
+            $pic->art_id = $i+1;
+            $pic->url = '/auction/img/34047.jpg';
+            $pic->isMaster = 1;
 
-        $pic->save();
+            $pic->save();
 
-        $pic = new App\Picture;
+            $pic = new App\Picture;
 
-        $pic->art_id = 1;
-        $pic->url = '/auction/img/47179.jpg';
-        $pic->isMaster = 0;
+            $pic->art_id = 1;
+            $pic->url = '/auction/img/47179.jpg';
+            $pic->isMaster = 0;
 
-        $pic->save();
+            $pic->save();
 
-        $pic->art_id = 1;
-        $pic->url = '/auction/img/47179.jpg';
-        $pic->isMaster = 0;
+            $pic->art_id = 1;
+            $pic->url = '/auction/img/47179.jpg';
+            $pic->isMaster = 0;
 
-        $pic->save();
+            $pic->save();
+        }
 
     }
 }
