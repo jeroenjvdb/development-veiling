@@ -27,7 +27,7 @@
 
 			<ul class="list-unstyled">
 				@foreach($footerStyle as $style)
-					<li>{{ $style->name }}</li>
+					<li><a href="{{  route('art.filter', ['class' => 'style', 'filter' => $style->id, 'sort' => 'new'])  }}">{{ $style->name }}</a></li>
 				@endforeach
 			</ul>
 			<h4>Style</h4>
@@ -44,19 +44,19 @@
 		<div class="col-md-4">
 			<h4>Price</h4>
 			<ul class="list-unstyled">
-				<li>Up to 5,000</li>
-				<li>5,000-10,000</li>
-				<li>10,000-25,000</li>
-				<li>25,000-50,000</li>
-				<li>50,000-100,000</li>
-				<li>above</li>
+				<li><a href="{{ route('art.filter', ['class' => 'price', 'filter' => '5000', 'sort' => 'new']) }}">Up to 5,000</a></li>
+				<li><a href="{{ route('art.filter', ['class' => 'price', 'filter' => '10000', 'sort' => 'new']) }}">5,000-10,000</a></li>
+				<li><a href="{{ route('art.filter', ['class' => 'price', 'filter' => '25000', 'sort' => 'new']) }}">10,000-25,000</a></li>
+				<li><a href="{{ route('art.filter', ['class' => 'price', 'filter' => '50000', 'sort' => 'new']) }}">25,000-50,000</a></li>
+				<li><a href="{{ route('art.filter', ['class' => 'price', 'filter' => '100000', 'sort' => 'new']) }}">50,000-100,000</a></li>
+				<li><a href="{{ route('art.filter', ['class' => 'price', 'filter' => 'plus', 'sort' => 'new']) }}">above</a></li>
 			</ul>
 			<h4>Era</h4>
 			<ul class="list-unstyled">
-				<li>Pre-war</li>
-				<li>1940s-1950s</li>
-				<li>1960s-1980s</li>
-				<li>1990s-Present</li>
+				<li><a href="{{ route('art.filter', ['class' => 'era', 'filter' => 'pre-war', 'sort' => 'new']) }}">Pre-war</a></li>
+				<li><a href="{{ route('art.filter', ['class' => 'era', 'filter' => '40-50', 'sort' => 'new']) }}">1940s-1950s</a></li>
+				<li><a href="{{ route('art.filter', ['class' => 'era', 'filter' => '60-80', 'sort' => 'new']) }}">1960s-1980s</a></li>
+				<li><a href="{{ route('art.filter', ['class' => 'era', 'filter' => '90', 'sort' => 'new']) }}">1990s-Present</a></li>
 			</ul>
 			<h4>Endings</h4>
 			<ul class="list-unstyled">

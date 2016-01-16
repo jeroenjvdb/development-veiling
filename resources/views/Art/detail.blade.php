@@ -134,7 +134,7 @@
 						<p><strong>{{trans('art.color')}}</strong> <br>
 							{{ $auction->color }}</p>
 						<div>
-							<a href="" class="question"><div>{{trans('art.ask')}}</div></a>
+							<a href="{{ route('contact', ['slug' => $auction->slug]) }}" class="question"><div>{{trans('art.ask')}}</div></a>
 						</div>
 					</div>
 				

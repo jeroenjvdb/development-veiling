@@ -222,5 +222,54 @@
 		opacity: 1;
 	}
 
+	form .fileupload .bootstrap-filestyle {
+	  width: 100%;
+	}
+
+	form .fileupload .btn-default {
+	  display: block;
+	  width: 100%;
+	  height: 62px;
+	  padding: 10px 20px;
+	  background-color: #686868;
+	  color: white;
+	  text-transform: uppercase;
+	  text-align: center;
+	  border-radius: 0;
+	  border: 1px solid #4e4e4e;
+	}
+	.home-small-img, .home-big-img{
+		position: relative;
+		text-align: center;
+	}
+	.home-small-img img{
+		max-height: 175px;
+	}
+	.home-big-img img{
+		max-height: 356px;
+	}
+
+	.home-small-img  .magnifier, .home-big-img  .magnifier{
+		position: absolute;
+		left: 45%;
+		top: 40%;
+		visibility: hidden;
+		color:white;
+		font-size: 50px;
+	}
+
+	.home-big-img .magnifier{
+		font-size: 75px;
+	}
+	.home-small-img:hover .magnifier, .home-big-img:hover .magnifier{
+		visibility: visible;
+	}
+
+	table tr th{
+		text-align: center;
+		background-color: #CCC;
+		border: none;
+	}
+
 
 </style>

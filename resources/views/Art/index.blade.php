@@ -63,7 +63,7 @@
 		@if($auctions)
 		@foreach($auctions as $auction)
 			<a href="{{ route('art.show', array('slug' => $auction->slug)) }}">
-				<div class="col-sm-3">
+				<div class="col-sm-4">
 					<div class="thumbnail">
 						@if($auction->pictures()->first())
 						<img src="{{ $auction->pictures()->first()->url }}" alt="">
@@ -76,6 +76,11 @@
 			</a>
 
 		@endforeach
+		<div class="row">
+			<div class="col-md-4 col-md-offset-8">
+				{!!  $auctions->render() !!}
+			</div>
+		</div>
 		@else
 		<p>there are no active auctions</p>
 		@endif

@@ -58,8 +58,8 @@
               <li><a href="{{ route('art.index') }}">{{trans('global.art')}}</a></li>
               <li><a href="#">{{ trans('global.Isearch') }}</a></li>
               <li><a href="{{ route('myAuctions') }}">{{trans('global.myauctions')}}</a></li>
-              <li><a href="#">{{trans('global.mybids')}}</a></li>
-              <li><a href="#">{{ trans('global.contact') }}</a></li>
+              <li><a href="{{ route('myBids') }}">{{trans('global.mybids')}}</a></li>
+              <li><a href="{{ route('contact') }}">{{ trans('global.contact') }}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="{{ route('language.select', 'nl') }}">NL</a></li>

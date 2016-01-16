@@ -63,10 +63,10 @@
 <hr>
 <div class="container">
 	<div class="row">
-
+		@if(count($art))
 		@foreach($art as $auction)
 			<a href="{{ route('art.show', array('slug' => $auction->slug)) }}">
-				<div class="col-sm-3">
+				<div class="col-sm-4">
 					<div class="thumbnail">
 						@if($auction->pictures()->first())
 						<img src="{{ $auction->pictures()->first()->url }}" alt="">
@@ -79,6 +79,8 @@
 			</a>
 
 		@endforeach
+		{!! $art->render() !!}
+		@endif
 	</div>
 	
 </div>

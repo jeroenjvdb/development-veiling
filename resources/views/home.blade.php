@@ -51,26 +51,51 @@
 @section('content')
 	<div class="white">
 		<div class="container">
-			<div class="col-md-4 center" >
-				<h3>Sign up</h3>
-				<p>Lorem ipsum dolor sit amet,</br> consectetur adipisicing elit,</br> sed do eiusmod tempor incididunt.</p>
-			</div>
-			<div class="col-md-4 center">
-				<h3>Make Deals</h3>
-				<p>Lorem ipsum dolor sit amet,</br> consectetur adipisicing elit,</br> sed do eiusmod tempor incididunt.</p>
-			</div>
-			<div class="col-md-4 center">
-				<h3>Everyone Happy</h3>
-				<p>Lorem ipsum dolor sit amet,</br> consectetur adipisicing elit,</br> sed do eiusmod tempor incididunt.</p>
-
-			</div>
+      <div class="row">
+        <div class="col-md-12 center"><h1 class="center">how does it work?</h1></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 center" >
+          <img src="/img/icon-pencil.png" alt="pencil icon">
+          <h3>Sign up</h3>
+          <p>Lorem ipsum dolor sit amet,</br> consectetur adipisicing elit,</br> sed do eiusmod tempor incididunt.</p>
+        </div>
+        <div class="col-md-4 center">
+          <img src="/img/icon-check.png" alt="check icon">
+          <h3>Make Deals</h3>
+          <p>Lorem ipsum dolor sit amet,</br> consectetur adipisicing elit,</br> sed do eiusmod tempor incididunt.</p>
+        </div>
+        <div class="col-md-4 center">
+          <img src="/img/icon-smiley.png" alt="smiley icon">
+          <h3>Everyone Happy</h3>
+          <p>Lorem ipsum dolor sit amet,</br> consectetur adipisicing elit,</br> sed do eiusmod tempor incididunt.</p>
+        </div>
+      </div>
 		</div>
 	</div>
 	<div class="grey">
 		<div class="container">
-			<h2 class="center">Most Popular this week</h2>
-		</div>
-	</div>
+      <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+          <h2 class="center">Most Popular this week</h2>
+          <div class="col-md-4 ">
+            <div class="row home-small-img"><img src="{{$auctions[1]->pictures->first()->url}}" alt="">
+              <span class="glyphicon glyphicon-search magnifier"></span>
+            </div>
+            <div class="row home-small-img"><img src="{{$auctions[2]->pictures->first()->url}}" alt="">
+                          <span class="glyphicon glyphicon-search magnifier"></span>
+            </div>
+
+          </div>
+          <div class="col-md-8 home-big-img">
+            <div class="row"><img src="{{$auctions[0]->pictures->first()->url}}" alt=""></div>
+                          <span class="glyphicon glyphicon-search magnifier"></span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 @stop
 
 @section('scripts')
