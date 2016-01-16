@@ -28,7 +28,7 @@ class ShowAuctionsController extends Controller
         {
             $auctions = [];
         }
-        $data = [];
+        // $data = [];
         $data['auctions'] = $auctions;
         $data['sort'] = $sort;
         return View('Art.index')->with($data);
@@ -69,7 +69,7 @@ class ShowAuctionsController extends Controller
         $auctions = $auctions->groupBy('bids.art_id')->paginate(9);
         
 
-        $data = [];
+        // $data = [];
         $data['search'] = $search;
         $data['FAQ'] = $FAQ;
         $data['art'] = $auctions;

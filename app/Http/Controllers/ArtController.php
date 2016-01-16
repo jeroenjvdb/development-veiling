@@ -150,7 +150,7 @@ class ArtController extends Controller
     public function show(Art $auction)
     {
         // dd($auction);
-        $data = [];
+        // $data = [];
         // $auction = Art::findorfail($id);
         //create all necessary time formats
         $end_datetime = Carbon::createFromFormat('Y-m-d H:i:s' ,$auction->end_datetime, 'Europe/Brussels');
@@ -209,7 +209,7 @@ class ArtController extends Controller
 
     public function myAuctions()
     {
-        $data = [];
+        // $data = [];
         $active = Art::where('user_id', Auth::user()->id)->
                         where('processed', '0')->
                         where('sold', '0')->get();
@@ -258,7 +258,7 @@ class ArtController extends Controller
         $art->sold = 1;
         $art->save();
 
-        $data = [];
+        // $data = [];
         $data['art'] = $art;
 
         return View('Art.bought')->with($data);
