@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use Session;
+use App\Style;
 
 
 abstract class Controller extends BaseController
@@ -18,5 +19,9 @@ abstract class Controller extends BaseController
     {
     	$lang = Session::get('locale');
         if ($lang != null) \App::setLocale($lang);
+
+        $data = [];
+        $styles = Style::all();
+        view()->share('footerStyle', $styles);
     }
 }

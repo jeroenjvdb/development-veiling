@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function overview()
     {
-        $data = [];
+        // $data = [];
         $user = Auth::user();
         $data['user'] = $user;
 
@@ -117,7 +117,7 @@ class UserController extends Controller
 
         // var_dump($auctions);
         // dd();
-        $data=[];
+        // $data=[];
         $data['auctions'] = $auctions;
         return View('User.my-bids')->with($data);
     }

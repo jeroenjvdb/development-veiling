@@ -21,6 +21,7 @@ class MainController extends Controller
 {
     public function dashboard()
     {
+        // var_dump()
         $auctions = Art::take(3)->get();
 
         // dd($auctions);
@@ -32,7 +33,7 @@ class MainController extends Controller
     {
     	$FAQ = FAQ::all();
 
-    	$data = [];
+    	// $data = [];
     	$data['FAQ'] = $FAQ;
 
     	return View('FAQ')->with($data);
@@ -41,7 +42,7 @@ class MainController extends Controller
     public function contact(Art $auction)
     {
         // var_dump($auction);
-        $data = [];
+        // $data = [];
         if(!$auction->id)
         {
             // var_dump('test');
