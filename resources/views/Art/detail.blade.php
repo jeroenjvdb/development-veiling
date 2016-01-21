@@ -5,66 +5,6 @@
 @stop
 
 @section('content')
-<style>
-	.right-column{
-		text-align: right;
-	}
-
-	.right-column .box input{
-		font-size: 20px;
-		padding: 10px;
-	}
-
-
-
-	.bid input[type='text']{
-		max-width: 100%;
-	}
-	.bid input[type="submit"]{
-		background-color: transparent;
-		border-style: hidden;
-		color:white;
-		text-align: left;
-	}
-
-	.info p{
-		margin-top: 0;
-		margin-bottom: 0;
-	}
-	.estimate{
-		font-size: 1.5em;
-		color: #211582;
-	}
-
-	.info .estimate-numbers{
-		font-size: 3em;
-	}
-
-	.buyNow{
-		color: rgb(1, 166, 160);
-		text-decoration: underline;
-	}
-	.buyNow:hover{
-		color: #211582;
-	}
-
-	.question{
-		/*margin: 20px auto;*/
-		/*width: 200px;*/
-		text-transform: uppercase;
-		color:white;
-		text-align: center;
-		font-size: 2em;
-	}
-
-	.question div{
-		width: 100%;
-		background-color: green;
-		padding: 20px;
-		margin: 20px auto;
-	}
-
-</style>
 	<div class="container">
 		<div class="row">
 			<h1>{{ $auction->title }}</h1>

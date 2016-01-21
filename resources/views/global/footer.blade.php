@@ -3,25 +3,24 @@
 		<div class="col-md-4">
 			<h4>help</h4>
 			<ul class="list-unstyled">
-				<li>login</li>
-				<li>Register</li>
+				<li><a href="{{ route('auth.login') }}">login</a></li>
+				<li><a href="{{ route('auth.register') }}">Register</a></li>
 			</ul>
 			<h4>Help</h4>
 			<ul class="list-unstyled">
 				<li>Terms of Service</li>
 				<li>Privacy Policy</li>
-				<li>{!! Html::link(route('FAQ'), 'FAQ') !!}</li>
-				<li>Contact Us</li>
-				<li>About Us</li>
+				<li><a href="{{ route('FAQ') }}">FAQ</a> </li>
+				<li><a href="{{ route('contact') }}">contact us</a></li>
+				<li><a href="{{ route('home') }}">About Us</a></li>
 			</ul>
 			<h4>Languages</h4>
 			<ul class="list-unstyled">
-				<li>Nederlands</li>
-				<li>English</li>
+				<li><a href="{{ route('language.select', 'nl') }}">Nederlands</a></li>
+				<li><a href="{{ route('language.select', 'en') }}">English</a></li>
 			</ul>
-
-
 		</div>
+
 		<div class="col-md-4">
 			<h4>Style</h4>
 
@@ -30,17 +29,8 @@
 					<li><a href="{{  route('art.filter', ['class' => 'style', 'filter' => $style->id, 'sort' => 'new'])  }}">{{ $style->name }}</a></li>
 				@endforeach
 			</ul>
-			<h4>Style</h4>
-			<ul class="list-unstyled">
-				<li>Design</li>
-				<li>Paintings and Works on Paper</li>
-				<li>Photographs</li>
-				<li>Prints and Multiples</li>
-				<li>Sculpture</li>
-			</ul>
-
-
 		</div>
+
 		<div class="col-md-4">
 			<h4>Price</h4>
 			<ul class="list-unstyled">
@@ -58,13 +48,7 @@
 				<li><a href="{{ route('art.filter', ['class' => 'era', 'filter' => '60-80', 'sort' => 'new']) }}">1960s-1980s</a></li>
 				<li><a href="{{ route('art.filter', ['class' => 'era', 'filter' => '90', 'sort' => 'new']) }}">1990s-Present</a></li>
 			</ul>
-			<h4>Endings</h4>
-			<ul class="list-unstyled">
-				<li>Ending this week</li>
-				<li>Newly listed</li>
-				<li>Purchase Now</li>
-				<li>1990s-present</li>
-			</ul>
+			
 		</div>
 	</div>
 	<div class="col-md-4 footercolumn footercolumn-right">
