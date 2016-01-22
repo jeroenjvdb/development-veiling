@@ -215,7 +215,7 @@ class ArtController extends Controller
         $expired = Art::where('user_id', Auth::user()->id)->
                         where('processed', '1')->
                         where('sold', '0')->get();
-        $allAuctions = Art::all();
+        $allAuctions = Art::where('user_id', Auth::user()->id)->get();
         //pending = no bids, but not over yet
         $pending = collect([]);
         

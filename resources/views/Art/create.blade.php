@@ -110,7 +110,7 @@
 				<div class="row">
 					<div class="col-md-4">
 						{!! Form::label('End date', 'end_datetime') !!}</br>
-						{!! Form::date('end_datetime', '', ['class' => 'form-control']) !!}
+						{!! Form::date('end_datetime', '', ['class' => 'form-control', 'placeholder' => 'mm/dd/yyyy hh:mm:ss']) !!}
 					</div>
 					<div class="col-md-8">
 						<span>Attention</span>
@@ -123,7 +123,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<input type="checkbox" value="TermsAgree" id="squaredTwo" name="TermsAgree" />
+						<input type="checkbox" value="true" id="squaredTwo" name="TermsAgree" />
 						<label for="TermsAgree">I agree to <a href="#">the terms and conditions</a></label>
 					</div>
 				</div>

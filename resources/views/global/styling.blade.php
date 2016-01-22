@@ -1,5 +1,4 @@
 <style>
-html{ overflow: hidden;}
  	body{
  		color: 	#4E4E4E;
  	}

@@ -38,7 +38,7 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->route('home');
+                return redirect()->back()->withErrors('you are not allowed to do this opperation');
             }
         }
 

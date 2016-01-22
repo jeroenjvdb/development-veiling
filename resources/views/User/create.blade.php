@@ -32,7 +32,7 @@
         </div>
         <div class="form-group">
             <label for="surname">geboortedatum</label>
-            {!! Form::date('date_of_birth', '',['placeholder' => '01/01/2015', 'type' => 'text', 'required']) !!}
+            {!! Form::date('date_of_birth', '',['placeholder' => 'mm/dd/yyyy', 'type' => 'text', 'required']) !!}
         </div>
 
 

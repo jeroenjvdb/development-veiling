@@ -14,11 +14,6 @@
 	<nav>
 		@include('global.nav')
 	</nav>
-
-	<header>
-		@yield('header')
-	</header>
-
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-offset-2 col-xs-8">
@@ -35,6 +30,11 @@
 		</div>
 		
 	</div>
+
+	<header>
+		@yield('header')
+	</header>
+
 	<div class="content">
 		@yield('content')
 	</div>

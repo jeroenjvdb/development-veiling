@@ -69,7 +69,10 @@
 						{{ $auction->artist->country }} <br>
 						{{ $auction->artist->date_of_birth }} - {{ $auction->artist->date_of_death }}</p>
 						<p><strong>{{trans('art.dimensions')}}</strong> <br>
-						<span itemprop="width" itemscope itemtype="http://schema.org/Distance">{{ $auction->width }}</span> x <span itemprop="height" itemscope itemtype="http://schema.org/Distance">{{ $auction->height }}</span>  {{ $auction->depth ? ' x <span itemprop="width" itemscope itemtype="http://schema.org/Distance">' . $auction->depth . '</span>' : '' }}</p>
+						<span itemprop="width" itemscope itemtype="http://schema.org/Distance">{{ $auction->width }}</span> x <span itemprop="height" itemscope itemtype="http://schema.org/Distance">{{ $auction->height }}</span>  
+						@if(isset($auction->depth))
+						x <span itemprop="depth" itemscope itemtype="http://schema.org/Distance">{{ $auction->depth}}
+						@endif</p>
 						<p><strong>{{trans('art.color')}}</strong> <br>
 							{{ $auction->color }}</p>
 						<div>
