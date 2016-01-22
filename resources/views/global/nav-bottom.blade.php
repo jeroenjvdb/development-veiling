@@ -9,7 +9,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/"><img src="/img/logo-footer.jpg" alt="logo Landoretti art" style=" z-index: 125; position: absolute;bottom:86px"></a>
+        <a class="navbar-brand" href="/"><img src="/img/logo-footer.jpg" alt="logo Landoretti art" style=" z-index: 125; position: relative;bottom:86px"></a>
       </div>
      </div>
     <div>

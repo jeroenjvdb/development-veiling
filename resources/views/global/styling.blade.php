@@ -1,4 +1,7 @@
 <style>
+ 	body{
+ 		color: 	#4E4E4E;
+ 	}
 	h1{
 		font-size: 36px;
 	}
@@ -8,6 +11,10 @@
 
 	h3{
 		margin-top: 10px;
+	}
+
+	a{
+		color: #21388A;
 	}
 
 	footer{
@@ -27,6 +34,8 @@
 
 	footer{
 		border-top: 1px solid #f3f3f3;
+
+		margin-bottom: 80px;
 	}
 	.footercolumn{
 		/*border-top: 1px solid #f3f3f3;*/
@@ -167,6 +176,15 @@
 		float: left;
 	}
 
+	.navbar a{
+		font-weight: 700;
+		color:#4E4E4E;
+	}
+
+	.navbar-top a{
+		color: #21388A;
+	}
+
 	.btn-no{
 		border: none;
 		background-color: transparent;
@@ -202,6 +220,70 @@
 
 	.hidden{
 		visibility: hidden;
+	}
+
+	.auction-preview{
+		margin-bottom: 10px;
+		margin-top: 15px;
+
+	}
+	.small-right .auction-preview{
+		margin-top: 0;
+		padding-bottom: 
+	}
+
+	.auction-preview hr{
+		margin:0;
+	}
+
+	.auction-details .artist{
+		color: #21388A;
+	}
+
+	.auction-details .title, .auction-details .highest-bid{
+		font-size: 1.2em;
+	}
+
+	.auction-details .title{
+		font-weight: 600;
+	}
+
+	.auction-visit{
+		overflow: hidden;
+		border-bottom: 1px solid #CCC;
+	}
+
+	.btn-visit{
+		float:right;
+		/*display: inline;*/
+		font-size: 1.2em;
+		text-transform: uppercase;
+		/*background-color: #F5F5F5;*/
+		color: #21388A;
+		border-radius: 0;
+		border-bottom: none;
+	}
+
+	.big-left{
+		position: relative;
+		height: 550px;
+		overflow:hidden;
+	}
+
+	.big-left img{
+		position:relative;
+		height: 550px;
+		max-width: none;
+		opacity: 0.5;
+	}
+	.big-left .auction-details-first{
+		position: absolute;
+		bottom: 100px;
+		left: 30px;
+		font-size: 3em;
+	}
+	.order-list{
+		float: left;
 	}
 
 	/*art detail*/
@@ -327,6 +409,21 @@
 		background-color: green;
 		padding: 20px;
 		margin: 20px auto;
+	}
+
+	.pagination, .pagination li a, .pagination li span{
+		border: none;
+		color: #4E4E4E;
+	}
+
+	.pagination a, .pagination span{
+	}
+
+	.pagination > li.active > span{
+		background-color: transparent;
+		border: none;
+		color: #4E4E4E;
+		font-weight: 800;
 	}
 
 
