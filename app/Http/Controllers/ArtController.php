@@ -111,9 +111,10 @@ class ArtController extends Controller
 
 
         $auction->save();
-
+        //store the images
         $this->storeImage($auction, $request->file('artwork'), true);
         $this->storeImage($auction, $request->file('signature'), false);
+        //store optional image if is set
         if($request->file('optional_image'))
         {
             $this->storeImage($auction, $request->file('optional_image'), false);
@@ -149,9 +150,6 @@ class ArtController extends Controller
      */
     public function show(Art $auction)
     {
-        // dd($auction);
-        // $data = [];
-        // $auction = Art::findorfail($id);
         //create all necessary time formats
         $end_datetime = Carbon::createFromFormat('Y-m-d H:i:s' ,$auction->end_datetime, 'Europe/Brussels');
         //array for all the time formats
@@ -168,7 +166,6 @@ class ArtController extends Controller
         $auction->toGo = $toGo;
 
         $data['auction'] = $auction;
-
         return View('Art.detail')->with($data);
 
     }
@@ -209,7 +206,6 @@ class ArtController extends Controller
 
     public function myAuctions()
     {
-        // $data = [];
         $active = Art::where('user_id', Auth::user()->id)->
                         where('processed', '0')->
                         where('sold', '0')->get();
@@ -220,15 +216,15 @@ class ArtController extends Controller
                         where('processed', '1')->
                         where('sold', '0')->get();
         $allAuctions = Art::all();
-        $pending = new \Illuminate\Database\Eloquent\Collection;
+        //pending = no bids, but not over yet
+        $pending = collect([]);
         
         
         foreach($allAuctions as $auction)
         {
-            // var_dump( count($auction->bids));
+
             if(!count($auction->bids) && $auction->processed == '0')
             {
-                // echo $auction->title;
                 $pending->push($auction);
             }
         }
@@ -244,11 +240,11 @@ class ArtController extends Controller
     public function buyNow($id)
     {
         $art = Art::findorfail($id);
-        var_dump($art->sold()->count());
         if($art->sold()->count() > 0)
         {
             return redirect()->back()->withErrors(['this item was already sold']);
         }
+
         $buyer = Auth::user();
         $sold = new Sold;
         $sold->art_id = $art->id;
@@ -258,7 +254,6 @@ class ArtController extends Controller
         $art->sold = 1;
         $art->save();
 
-        // $data = [];
         $data['art'] = $art;
 
         return View('Art.bought')->with($data);
@@ -279,6 +274,7 @@ class ArtController extends Controller
         return $highest;
     }
 
+    //make slugs
     protected function slugify($text)
     { 
       // replace non letter or digits by -

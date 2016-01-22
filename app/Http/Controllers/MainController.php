@@ -21,10 +21,8 @@ class MainController extends Controller
 {
     public function dashboard()
     {
-        // var_dump()
         $auctions = Art::take(3)->get();
 
-        // dd($auctions);
         $data['auctions'] = $auctions;
     	return View('home')->with($data);
     }
@@ -33,19 +31,14 @@ class MainController extends Controller
     {
     	$FAQ = FAQ::all();
 
-    	// $data = [];
     	$data['FAQ'] = $FAQ;
-
     	return View('FAQ')->with($data);
     }
 
     public function contact(Art $auction)
     {
-        // var_dump($auction);
-        // $data = [];
         if(!$auction->id)
         {
-            // var_dump('test');
             $allAuctions = Art::where('processed', '0')->get();
             $data['allAuctions'] = $allAuctions;
         } else
@@ -59,12 +52,11 @@ class MainController extends Controller
     {
         $auction = Art::findorfail($request->input('auction'))->first();
         $auctionEmail = $auction->user->email;
-        // var_dump($auctionEmail);
+
         $data['receiver'] = $auctionEmail;
         $data['sender'] = $request->input('email');
         $data['question'] = $request->input('question');
-        // var_dump($data);
-        // return View('emails.question')->with($data);
+        // send mail to owner of art
         Mail::send('emails.question', $data,
                     function($message) use ($data) {
                         $message->to($data['receiver'])
@@ -77,6 +69,7 @@ class MainController extends Controller
 
     public function setLocale($lang)
     {
+        //change language
         Session::put('locale', $lang);
             App::setLocale($lang);
             echo Lang::getLocale();

@@ -44,29 +44,24 @@ class BidController extends Controller
     {
         $validation = $this->validator($request->all());
 
-        // if($validation->fails())
-        // {
-        //     return redirect()->back()->withErrors($validation);
-        // }
-        $bids = Art::find($id)->bids()->get();
-        // var_dump($bids);
+        $bids = Art::findOrFail($id)->bids()->get();
         $lower = false;
-        echo $request->input('amount');
-            foreach($bids as $bid)
+        foreach($bids as $bid)
+        {
+            //check if bid is higher than all other bids on this item
+            if($bid->price >= $request->input('amount'))
             {
-                // echo $bid->price;
-                if($bid->price >= $request->input('amount'))
-                {
-                    $lower = true;
-                }
-            
-
+                $lower = true;
             }
         
+
+        }
+        //if bid isn't higher, run exception
         if($lower)
         {
             return redirect()->back()->withErrors(['er is reeds hoger geboden op deze veiling']);
         } else {
+            //else make bid
             $bid = new Bid;
             $bid->user_id = Auth::user()->id;
             $bid->art_id = $id;
@@ -79,19 +74,15 @@ class BidController extends Controller
 
     public function myBids()
     {
+        //get all your bids
         $bids = Bid::where('user_id', Auth::user()->id)->groupBy('art_id')->get();
         $auctions = collect([]);
-        // echo '<pre>';
         foreach($bids as $bid)
         {
             $auction = $bid->art;
-            // var_dump($auction);
             $auctions->push($auction);
         }
 
-        // var_dump($auctions);
-        // dd();
-        // $data=[];
         $data['auctions'] = $auctions;
         return View('User.my-bids')->with($data);
     }

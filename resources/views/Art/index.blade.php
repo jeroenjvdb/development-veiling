@@ -5,9 +5,76 @@
 @stop
 
 @section('content')
+<style>
+	.auction-preview{
+		margin-bottom: 10px;
+		margin-top: 15px;
+
+	}
+	.small-right .auction-preview{
+		margin-top: 0;
+		padding-bottom: 
+	}
+
+	.auction-preview hr{
+		margin:0;
+	}
+
+	.auction-details .artist{
+		color: #21388A;
+	}
+
+	.auction-details .title, .auction-details .highest-bid{
+		font-size: 1.2em;
+	}
+
+	.auction-details .title{
+		font-weight: 600;
+	}
+
+	.auction-visit{
+		overflow: hidden;
+		border-bottom: 1px solid #CCC;
+	}
+
+	.btn-visit{
+		float:right;
+		/*display: inline;*/
+		font-size: 1.3em;
+		text-transform: uppercase;
+		/*background-color: #F5F5F5;*/
+		color: #21388A;
+		border-radius: 0;
+		border-bottom: none;
+	}
+
+	.big-left{
+		position: relative;
+		height: 550px;
+		overflow:hidden;
+	}
+
+	.big-left img{
+		position:relative;
+		height: 550px;
+		max-width: none;
+		opacity: 0.5;
+	}
+	.big-left .auction-details-first{
+		position: absolute;
+		bottom: 100px;
+		left: 30px;
+		font-size: 3em;
+	}
+	.order-list{
+		float: left;
+	}
+
+
+</style>
 <div class="container">
 	<div class="row">
-	<ul class="list-inline">
+	<ul class="list-inline order-list">
 		<li><strong>SORT BY:</strong></li>
 		<li><a href="{{ route('art.filter', ['sort' => 'ending-soonest']) }}">ending soonest</a></li>
 		<li><a href="{{ route('art.filter', ['sort' => 'ending-latest']) }}">ending latest</a></li>
@@ -61,26 +128,86 @@
 <div class="container">
 	<div class="row">
 		@if($auctions)
-		@foreach($auctions as $auction)
-			<a href="{{ route('art.show', array('slug' => $auction->slug)) }}">
-				<div class="col-sm-4">
-					<div class="thumbnail">
-						@if($auction->pictures()->first())
-						<img src="{{ $auction->pictures()->first()->url }}" alt="">
-						@endif
-					</div>
-					{{ $auction->date_of_creation }}, {{ $auction->artist->name }} <br>
-					{{$auction->title}} <br>
-					{{ $auction->highest_bid != 0 ? $auction->highest_bid : $auction->est_low_price }}
-				</div>	
-			</a>
+			@foreach($auctions as $key => $auction)
+				@if($key == 0)
+				<div class="row">
+						<div class="col-sm-6 big-left">
+							<div class="auction-image">
+								@if($auction->pictures()->first())
+					<a href="{{ route('art.show', array('slug' => $auction->slug)) }}">
+								<img src="{{ $auction->pictures()->first()->url }}" alt="auction image {{ $auction->title }}">
+					</a>
+								@endif
+							</div>
+							<div class="auction-details-first">
+							{{ $auction->date_of_creation }}, {{ $auction->artist->name }} <br>
+							{{$auction->title}} <br>
+							{{ $auction->highest_bid != 0 ? $auction->highest_bid : $auction->est_low_price }}
+							</div>
+							
+						</div>	
+				@elseif($key>0 && $key < 5)
+				@if($key == 1)
+					<div class="col-sm-6 small-right ">
+				@endif
 
-		@endforeach
-		<div class="row">
-			<div class="col-md-4 col-md-offset-8">
-				{!!  $auctions->render() !!}
+						<div class="col-sm-6 auction-preview">
+							<div class="auction-image">
+					<a href="{{ route('art.show', array('slug' => $auction->slug)) }}">
+								@if($auction->pictures()->first())
+								<img src="{{ $auction->pictures()->first()->url }}" alt="">
+								@endif
+					</a>
+							</div>
+							<div class="row auction-details">
+								<div class="col-sm-12">
+									<p > <span class="artist">{{ $auction->date_of_creation }}, {{ $auction->artist->name }}</span><br>
+									<span class="title">{{$auction->title}}</span> <br>
+									<span class="highest-bid">&euro; {{ $auction->highest_bid != 0 ? $auction->highest_bid : $auction->est_low_price }}</span></p>
+									<div class="auction-visit">
+										<a href="{{ route('art.show', array('slug' => $auction->slug)) }}" class="btn btn-visit btn-default">Visit auction ></a>
+										<p>25d 14u 44m</p>	
+									</div>
+								</div>
+							</div>
+						</div>
+					@if($key == 4)
+						</div></div>
+					@endif
+				@elseif($key > 4)
+					@if($key == 5)
+						<div class="row">
+					@endif
+							<div class="col-sm-3 small-under auction-preview">
+								<div class="auction-image">
+						<a href="{{ route('art.show', array('slug' => $auction->slug)) }}">
+									@if($auction->pictures()->first())
+									<img src="{{ $auction->pictures()->first()->url }}" alt="">
+									@endif
+						</a>
+								</div>
+							<div class="row auction-details">
+								<div class="col-sm-12">
+									<p > <span class="artist">{{ $auction->date_of_creation }}, {{ $auction->artist->name }}</span><br>
+									<span class="title">{{$auction->title}}</span> <br>
+									<span class="highest-bid">&euro; {{ $auction->highest_bid != 0 ? $auction->highest_bid : $auction->est_low_price }}</span></p>
+									<div class="auction-visit">
+										<a href="{{ route('art.show', array('slug' => $auction->slug)) }}" class="btn btn-visit btn-default">Visit auction ></a>
+										<p>25d 14u 44m</p>	
+									</div>
+								</div>
+							</div>
+							</div>	
+					@if($key == count($auctions) -1 )
+						</div>
+					@endif
+				@endif
+			@endforeach
+			<div class="row">
+				<div class="col-md-4 col-md-offset-8">
+					{!!  $auctions->render() !!}
+				</div>
 			</div>
-		</div>
 		@else
 		<p>there are no active auctions</p>
 		@endif

@@ -28,7 +28,7 @@ class ShowAuctionsController extends Controller
         {
             $auctions = [];
         }
-        // $data = [];
+
         $data['auctions'] = $auctions;
         $data['sort'] = $sort;
         return View('Art.index')->with($data);
@@ -43,16 +43,17 @@ class ShowAuctionsController extends Controller
 
     public function search(Request $request, $search, $sort = 'new', $class = null, $filter = null)
     {
-
-        // $search = $request->input('search');
+        //check if something was searched
         if($search == "")
         {
             return redirect()->route('home')->withErrors(['please fill in the searchbox']);
         }
 
+        //get all FAQ found on search
         $FAQ = FAQ::where('question', 'like', '%'. $search .'%')->
                         orwhere('answer', 'like', '%' . $search . '%')->get();
 
+        //get all auctions found on search
         $artOutput = Art::selectRaw('art.*, max(bids.price) as highest_bid, count(bids.art_id) AS `count`')->leftJoin('bids', 'bids.art_id','=', 'art.id')
                             ->groupBy('art.id')
                             ->where(function($query) use ($search){
@@ -62,19 +63,15 @@ class ShowAuctionsController extends Controller
                             })
                             ->where('art.processed', '0');
 
-
-        // var_dump($searchOutput)
-        //add auction filters
-        $auctions = $this->add_filters($artOutput, $sort, $class, $filter);
-        $auctions = $auctions->groupBy('bids.art_id')->paginate(9);
+        //add filters to art
+        $auctions       = $this->add_filters($artOutput, $sort, $class, $filter);
+        $auctions       = $auctions->groupBy('bids.art_id')->paginate(9);
         
-
-        // $data = [];
         $data['search'] = $search;
-        $data['FAQ'] = $FAQ;
-        $data['art'] = $auctions;
-        $data['sort'] = $sort;
-        $data['route'] = 'art.search';
+        $data['FAQ']    = $FAQ;
+        $data['art']    = $auctions;
+        $data['sort']   = $sort;
+        $data['route']  = 'art.search';
 
 
         return View('search')->with($data);
@@ -82,6 +79,7 @@ class ShowAuctionsController extends Controller
 
     protected function add_filters($auctions, $sort, $class, $filter)
     {
+        //sort array
         switch ($sort) {
             case 'soonest':
                 $auctions = $auctions->orderBy('end_datetime', 'asc');

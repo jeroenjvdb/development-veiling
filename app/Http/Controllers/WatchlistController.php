@@ -23,12 +23,9 @@ class WatchlistController extends Controller
      */
     public function index()
     {
-        // $data = [];
+        //get all watchlist items
         $watchlist = Watchlist::where('user_id', Auth::user()->id)->get();
-        // var_dump($watchlist);
-        // $auctions = $watchlist->art;
-      
-        // var_dump($auctions->title);
+        
         $data['watchlist'] = $watchlist;
         return View('Watchlist.index')->with($data);
     }
@@ -40,6 +37,7 @@ class WatchlistController extends Controller
      */
     public function create($id)
     {
+        //add auction to watchlist
         $watchlist = new Watchlist;
 
         $watchlist->user_id = Auth::user()->id;

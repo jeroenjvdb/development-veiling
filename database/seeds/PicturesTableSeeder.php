@@ -11,7 +11,7 @@ class PicturesTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i<70;$i++)
+        for($i = 0; $i<15;$i++)
         {
             $pic = new App\Picture;
 
@@ -23,13 +23,15 @@ class PicturesTableSeeder extends Seeder
 
             $pic = new App\Picture;
 
-            $pic->art_id = 1;
+            $pic->art_id = $i+1;
             $pic->url = '/auction/img/47179.jpg';
             $pic->isMaster = 0;
 
             $pic->save();
 
-            $pic->art_id = 1;
+            $pic = new App\Picture;
+
+            $pic->art_id = $i+1;
             $pic->url = '/auction/img/47179.jpg';
             $pic->isMaster = 0;
 

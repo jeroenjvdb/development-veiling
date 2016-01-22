@@ -12,7 +12,7 @@ class ArtTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i < 70; $i++)
+        for($i = 0; $i < 15; $i++)
         {
 
             $auction = new Art;

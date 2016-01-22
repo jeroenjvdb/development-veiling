@@ -11,11 +11,11 @@
 |
 */
 Route::bind('auction', function($slug){
-	return App\Art::where('slug', $slug)->first();
+	return App\Art::where('slug', $slug)->firstOrFail();
 });
 
 
-Route::get('/language/{lang}', 				array('as' => 'language.select', 'uses' => 'MainController@setLocale'));
+Route::get('/language/{lang}', 	array('as' => 'language.select', 'uses' => 'MainController@setLocale'));
 
 
 Route::get('/', ['as' => 'home', 'uses' => 'MainController@dashboard']);
