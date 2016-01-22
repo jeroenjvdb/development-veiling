@@ -81,7 +81,7 @@ MAIL_NAME=[application_name]
 cron instellen:
 crontab -e
 onderaan de file toevoegen:
-* * * * * php path/to/root/artisan schedule:run >> /dev/null 2>&1
+ * * * * * php path/to/root/artisan schedule:run >> /dev/null 2>&1
 
 
 
