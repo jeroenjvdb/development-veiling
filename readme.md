@@ -28,8 +28,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ##deploy
 download files
--(https:) git clonehttps://github.com/jeroenjvdb/development-veiling.git       
--(ssh: ) git clonegit@github.com:jeroenjvdb/development-veiling.git      
+-(https:) `git clonehttps://github.com/jeroenjvdb/development-veiling.git     `     
+-(ssh: ) `git clonegit@github.com:jeroenjvdb/development-veiling.git     `   
 
 
 `sudo composer install  `   
