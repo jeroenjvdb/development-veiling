@@ -31,8 +31,58 @@ download files
 -(https:) git clonehttps://github.com/jeroenjvdb/development-veiling.git
 -(ssh: ) git clonegit@github.com:jeroenjvdb/development-veiling.git
 
-composer install
-install mysql
+
+sudo composer install
+sudo composer self-update
 
 set root directory to public map
+(c9:) 
+sudo nano /etc/apache2/sites-enabled/001-cloud9.conf
+change:
+documentRoot /home/ubuntu/workspace
+to:
+documentRoot /home/ubuntu/workspace/public
+
+sudo composer update
+php artisan key:generate
+install mysql
+
+add database
+check DB host
+(mysql)
+use [database_name]
+select @@hostname
+exit
+
+in .env (root directory)
+DB_HOST=[database_hostname]
+DB_DATABASE=[database_name]
+DB_USERNAME=[datebase_username]
+DB_PASSWORD=[database_password]
+
+
+add tables to database
+php artisan migrate --seed
+
+
+instellen mail:
+(https://laravel.com/docs/5.1/mail)
+in .env
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_ENCRYPTION=tls
+MAIL_PORT=587
+MAIL_USERNAME=[email_adress]
+MAIL_PASSWORD=[email_password]
+MAIL_FROM=[email_adress]
+MAIL_NAME=[application_name]
+
+cron instellen:
+crontab -e
+onderaan de file toevoegen:
+* * * * * php path/to/root/artisan schedule:run >> /dev/null 2>&1
+
+
+
 
